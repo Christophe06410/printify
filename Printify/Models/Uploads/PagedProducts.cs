@@ -4,18 +4,20 @@
 
 namespace Printify.Models.Uploads
 {
-    using System.Collections.Generic;
+	using Printify.Models.Products;
+
+	using System.Collections.Generic;
     using System.Text.Json.Serialization;
 
     /// <summary>
     /// The paged images record.
     /// </summary>
-    public record PagedImages : PagedEntities
+    public record PagedProducts : PagedEntities
     {
         /// <summary>
         /// Gets the data.
         /// </summary>
         /// <value>The data.</value>
-        public List<Image> Data { get; } = new List<Image>();
+        public List<Product> Data { get; set; } = new List<Product>();
     }
 }

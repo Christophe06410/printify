@@ -1,34 +1,28 @@
-﻿// <copyright file="PrintArea.cs" company="improvGroup, LLC">
+// <copyright file="PrintArea.cs" company="improvGroup, LLC">
 //     Copyright © 2021 improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
 namespace Printify.Models.Products
 {
     using System;
-    using System.Text.Json.Serialization;
+	using System.Collections.Generic;
+	using System.Text.Json.Serialization;
 
-    /// <summary>
-    /// The print area record.
-    /// </summary>
+	/// <summary>
+	/// The print area record.
+	/// </summary>
     public record PrintArea
     {
-        /// <summary>
-        /// Gets or sets the image URL.
-        /// </summary>
-        /// <value>The image URL.</value>
-        [JsonPropertyName("image_url")]
-        public Uri ImageUrl { get; init; } = new Uri("");
+		[JsonPropertyName("variant_ids")]
+		public List<int> VariantIds { get; set; }
 
-        /// <summary>
-        /// Gets or sets the placeholder.
-        /// </summary>
-        /// <value>The placeholder.</value>
-        public Placeholder Placeholder { get; init; } = new Placeholder();
+		public List<Placeholder> Placeholders { get; set; }
 
-        /// <summary>
-        /// Gets or sets the position.
-        /// </summary>
-        /// <value>The position.</value>
-        public string Position { get; init; } = string.Empty;
-    }
+		[JsonPropertyName("font_color")]
+		public string FontColor { get; set; }
+
+		[JsonPropertyName("font_family")]
+		public string FontFamily { get; set; }
+		public string Background { get; set; }
+	}
 }

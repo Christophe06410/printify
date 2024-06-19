@@ -5,6 +5,7 @@
 namespace Printify
 {
 	using Microsoft.Extensions.Logging;
+	using Printify.Models;
 
 	using System;
 	using System.Diagnostics.CodeAnalysis;
@@ -35,7 +36,7 @@ namespace Printify
 			AllowTrailingCommas = true,
 			PropertyNameCaseInsensitive = true,
 			PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-			ReadCommentHandling = JsonCommentHandling.Allow,
+			ReadCommentHandling = JsonCommentHandling.Skip,
 		};
 
 		/// <summary>
@@ -65,7 +66,10 @@ namespace Printify
 			this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
 			this.httpClient.BaseAddress = new Uri(BaseURL);
 			this.httpClient.DefaultRequestHeaders.Accept.ParseAdd(ContentType);
+			this.httpClient.DefaultRequestHeaders.Add("User-Agent", "PrintifyManager");
 			this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+
+			jsonSerializerOptions.Converters.Add(new CustomDateTimeConverter());
 		}
 
 		/// <inheritdoc />

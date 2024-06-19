@@ -4,15 +4,18 @@
 
 namespace Printify.Models.Products
 {
-    /// <summary>
-    /// The product option class.
-    /// </summary>
-    public class ProductOption
-    {
-        /// <summary>
-        /// Gets or sets the name.
-        /// </summary>
-        /// <value>The name.</value>
+	using System.Collections.Generic;
+	using System.Text.Json.Serialization;
+
+	/// <summary>
+	/// The product option class.
+	/// </summary>
+	public class ProductOption
+	{
+		/// <summary>
+		/// Gets or sets the name.
+		/// </summary>
+		/// <value>The name.</value>
         public string Name { get; init; } = string.Empty;
 
         /// <summary>
@@ -21,6 +24,16 @@ namespace Printify.Models.Products
         /// <value>The type.</value>
         public string Type { get; init; } = string.Empty;
 
-        // TODO: Options are possibly not able to be strongly typed easily due to implementation. Look into this more. Docs suck.
-    }
+		public List<ProductOptionValue> Values { get; set; }
+
+        [JsonPropertyName("display_in_preview")]
+		public bool DisplayInPreview { get; set; }
+	}
+
+	public class ProductOptionValue
+	{
+		public int Id { get; set; }
+		public string Title { get; set; }
+		public List<string> Colors { get; set; }
+	}
 }

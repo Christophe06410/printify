@@ -24,21 +24,21 @@ namespace Printify.Models.Products
 		/// Required when creating a product, but is read only after. See catalog for how to get blueprint_id.
 		/// </remarks>
 		[JsonPropertyName("blueprint_id")]
-		public int BlueprintId { get; init; }
+		public int BlueprintId { get; set; }
 
 		/// <summary>
 		/// Gets or sets the date and time when a product was created.
 		/// </summary>
 		/// <value>The date and time when a product was created.</value>
 		[JsonPropertyName("created_at")]
-		public DateTimeOffset CreatedAt { get; init; }
+		public DateTime? CreatedAt { get; set; }
 
 		/// <summary>
 		/// Gets or sets the description of the product. Supports HTML formatting.
 		/// </summary>
 		/// <value>The description of the product. Supports HTML formatting.</value>
 		[Required]
-		public string Description { get; init; } = string.Empty;
+		public string Description { get; set; } = string.Empty;
 
 		/// <summary>
 		/// Gets the external.
@@ -57,7 +57,7 @@ namespace Printify.Models.Products
 		/// <value>The unique string identifier for the product.</value>
 		[Key]
 		[Required]
-		public string Id { get; init; } = string.Empty;
+		public string Id { get; set; } = string.Empty;
 
 		/// <summary>
 		/// Gets the mock-up images are read only values. The mock-up images are grouped by variants
@@ -74,7 +74,7 @@ namespace Printify.Models.Products
 		/// A product is locked during publishing. Locked products can't be updated until unlocked.
 		/// </remarks>
 		[JsonPropertyName("is_locked")]
-		public bool IsLocked { get; init; }
+		public bool IsLocked { get; set; }
 
 		/// <summary>
 		/// Gets the options. Options are read only values and describe product options. There can
@@ -102,7 +102,7 @@ namespace Printify.Models.Products
 		/// </summary>
 		/// <value>The print details.</value>
 		[JsonPropertyName("print_details")]
-		public PrintDetails PrintDetails { get; init; } = new PrintDetails();
+		public List<PrintDetails> PrintDetails { get; set; }
 
 		/// <summary>
 		/// Gets or sets the print provider identifier.
@@ -112,7 +112,7 @@ namespace Printify.Models.Products
 		/// Required when creating a product, but is read only after. See catalog for how to get print_provider_id.
 		/// </remarks>
 		[JsonPropertyName("print_provider_id")]
-		public int PrintProviderId { get; init; }
+		public int PrintProviderId { get; set; }
 
 		/// <summary>
 		/// Gets the product properties specific to the sales channel associated with the product.
@@ -131,7 +131,7 @@ namespace Printify.Models.Products
 		/// </summary>
 		/// <value>The shop identifier that a product belongs to.</value>
 		[JsonPropertyName("shop_id")]
-		public int ShopId { get; init; }
+		public int ShopId { get; set; }
 
 		/// <summary>
 		/// Gets the tags, which are also published to sales channel.
@@ -144,21 +144,21 @@ namespace Printify.Models.Products
 		/// </summary>
 		/// <value>The name of the product.</value>
 		[Required]
-		public string Title { get; init; } = string.Empty;
+		public string Title { get; set; } = string.Empty;
 
 		/// <summary>
 		/// Gets or sets the date and time when a product was last updated.
 		/// </summary>
 		/// <value>The date and time when a product was last updated.</value>
 		[JsonPropertyName("update_at")]
-		public DateTimeOffset UpdateAt { get; init; }
+		public DateTime? UpdateAt { get; set; }
 
 		/// <summary>
 		/// Gets or sets the user identifier that a product belongs to.
 		/// </summary>
 		/// <value>The user identifier that a product belongs to.</value>
 		[JsonPropertyName("user_id")]
-		public int UserId { get; init; }
+		public int UserId { get; set; }
 
 		/// <summary>
 		/// Gets the list of all product variants, each representing a different version of the
@@ -173,6 +173,19 @@ namespace Printify.Models.Products
 		/// Used for publishing.
 		/// </summary>
 		/// <value>The visibility in sales channel.</value>
-		public bool Visible { get; init; } = true;
+		public bool Visible { get; set; } = true;
+
+		[JsonPropertyName("is_printify_express_eligible")]
+		public bool IsPrintifyExpressEligible { get; set; }
+
+		[JsonPropertyName("is_printify_express_enabled")]
+		public bool IsPrintifyExpressEnabled { get; set; }
+
+		[JsonPropertyName("is_economy_shipping_eligible")]
+		public bool IsEconomyShippingEligible { get; set; }
+
+		[JsonPropertyName("is_economy_shipping_enabled")]
+		public bool IsEconomyShippingEnabled { get; set; }
+
 	}
 }

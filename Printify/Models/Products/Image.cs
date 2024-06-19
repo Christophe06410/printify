@@ -1,19 +1,22 @@
-﻿// <copyright file="Image.cs" company="improvGroup, LLC">
+// <copyright file="Image.cs" company="improvGroup, LLC">
 //     Copyright © 2021 improvGroup, LLC. All Rights Reserved.
 // </copyright>
 
 namespace Printify.Models.Products
 {
-    /// <summary>
-    /// The image record.
-    /// </summary>
-    public record Image
-    {
-        /// <summary>
-        /// Gets or sets the angle used to rotate the image.
-        /// </summary>
-        /// <value>The angle used to rotate the image.</value>
-        /// <remarks>See image positioning for reference on how to position images.</remarks>
+	using System.Collections.Generic;
+	using System.Text.Json.Serialization;
+
+	/// <summary>
+	/// The image record.
+	/// </summary>
+	public record Image
+	{
+		/// <summary>
+		/// Gets or sets the angle used to rotate the image.
+		/// </summary>
+		/// <value>The angle used to rotate the image.</value>
+		/// <remarks>See image positioning for reference on how to position images.</remarks>
         public int Angle { get; init; }
 
         /// <summary>
@@ -76,5 +79,18 @@ namespace Printify.Models.Products
         /// <value>The position of the image on the Y axis.</value>
         /// <remarks>See image positioning for reference on how to position images.</remarks>
         public float Y { get; init; }
-    }
+
+		public string Src { get; set; }
+
+        [JsonPropertyName("variant_ids")]
+		public List<int> VariantIds { get; set; }
+		public string Position { get; set; }
+
+        [JsonPropertyName("is_default")]
+		public bool IsDefault { get; set; }
+
+        [JsonPropertyName("is_selected_for_publishing")]
+		public bool IsSelectedForPublishing { get; set; }
+		public object Order { get; set; }
+	}
 }
